@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moto X3M Dead Ahead - ZSGames</title>
+  <link rel="icon" href="https://zsgames.hs.vc/favicon.ico">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    .game-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 15px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .poster-container {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .poster-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #007bff;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .play-button:hover {
+      background: #0056b3;
+    }
+
+    iframe {
+      display: none;
+      width: 100%;
+      height: 600px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .info-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #eee;
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .info-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .info-left img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .info-left .game-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-left .game-text h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .info-left .game-text p {
+      margin: 2px 0 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .info-right button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #007bff;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .info-right button:hover {
+      background: #0056b3;
+    }
+
+    .game-details {
+      margin-top: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .game-details h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-container">
+    <!-- Poster with play button -->
+    <div class="poster-container" id="poster">
+      <img id="posterImage" src="poster.jpg" alt="Game Poster">
+      <button class="play-button" onclick="playGame()">▶ Play</button>
+    </div>
+
+    <!-- Game iframe -->
+    <iframe id="gameFrame" src=""></iframe>
+
+    <!-- Info bar -->
+    <div class="info-bar">
+      <div class="info-left">
+        <img id="posterThumb" src="poster.jpg" alt="Poster Thumb">
+        <div class="game-text">
+          <h3>Moto X3M Dead Ahead</h3>
+          <p>by CarGames.Com</p>
+        </div>
+      </div>
+      <div class="info-right">
+        <button onclick="shareGame()">🔗 Share</button>
+        <button onclick="fullscreenGame()">⛶ Fullscreen</button>
+      </div>
+    </div>
+
+    <!-- Game details -->
+    <div class="game-details">
+      <h2>About This Game</h2>
+      <p>
+        Racing game enthusiasts, are you ready? This is a game that's going to make your adrenaline skyrocket - Moto X3M Dead Ahead! It's an exciting blend of motor, driving, and even a bit of shooting. Driving a cool motorcycle, take your partner with you and race through tricky tracks.The game offers thrilling driving action as you avoid obstacles like wrecked cars, fallen debris, and explosive traps.
+      </p>
+      <p><strong>Controls:</strong> Up Arrow or W to accelrate. Left Arrow,Right Arrow or A,D to Rotate. Down Arrow or S for Brake</p>
+      <p><strong>Category:</strong> shoot-em-up,track,motercycle,Kids Friendly,No Blood</p>
+    </div>
+  </div>
+
+  <script>
+    // Set poster + iframe URL here
+    const posterUrl = "https://img.gamedistribution.com/8593f8d7add14ad398d9cece72ee7283-512x512.jpg";
+    const gameUrl = "https://html5.gamedistribution.com/rvvASMiM/8593f8d7add14ad398d9cece72ee7283/index.html";
+
+    document.getElementById("posterImage").src = posterUrl;
+    document.getElementById("posterThumb").src = posterUrl;
+
+    function playGame() {
+      document.getElementById("poster").style.display = "none";
+      const iframe = document.getElementById("gameFrame");
+      iframe.src = gameUrl;
+      iframe.style.display = "block";
+    }
+
+    function shareGame() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("Game link copied to clipboard!");
+      });
+    }
+
+    function fullscreenGame() {
+      const iframe = document.getElementById("gameFrame");
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.mozRequestFullScreen) {
+        iframe.mozRequestFullScreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+    }
+  </script>
+
+</body>
+</html>
